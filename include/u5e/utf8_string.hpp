@@ -4,6 +4,7 @@
 #include <u5e/basic_encodedstring.hpp>
 #include <u5e/utf8_iterator.hpp>
 #include <u5e/utf8.hpp>
+#include <string>
 
 namespace u5e {
   /**

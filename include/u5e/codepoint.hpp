@@ -30,39 +30,12 @@ namespace u5e {
     constexpr codepoint(int32_t v) : value(v) { };
 
     /**
-     * Copy constructor.
-     */
-    constexpr codepoint(const codepoint& x) = default;
-
-    /**
-     * Assignment operator from another codepoint.
-     */
-    constexpr codepoint& operator=(const codepoint& x) = default;
-
-    /**
-     * Assignment operator from an int.
-     */
-    constexpr codepoint& operator=(int c) { value = c; return *this; };
-
-    /**
      * Override int operator to return the codepoint value.
      */
     constexpr operator int() const { return value; };
+
+  	constexpr bool operator==(const codepoint& b) { return value == b.value; };
   };
-
-  /**
-   * Compare two codepoints by comparing their values.
-   */
-  constexpr bool operator==(const codepoint& a, const codepoint& b) { return a.value == b.value; };
-
-  //@{
-  /**
-   * Compare an int to a codepoint by comparing the codepoint's value
-   * with the integer.
-   */
-  constexpr bool operator==(const codepoint_traits::int_type a, const codepoint& b) { return a == b.value; };
-  constexpr bool operator==(const codepoint& a, const codepoint_traits::int_type b) { return a.value == b; };
-  //@}
 }
 
 #endif

@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include <experimental/string_view>
-#include <string.h>
+#include <string_view>
+#include <string>
 #include <iterator>
 
 #include <u5e/utf8_iterator.hpp>
@@ -8,7 +8,7 @@
 #include <u5e/utf8_string_view.hpp>
 
 using std::string;
-using std::experimental::string_view;
+using std::string_view;
 using u5e::codepoint;
 using u5e::utf8_string;
 using u5e::utf8_string_view;

@@ -5,6 +5,29 @@
 #include <algorithm>
 
 namespace u5e {
+    namespace detail {
+
+#ifdef _MSC_VER
+	inline int clz(uint32_t value)
+	{
+	    unsigned long leading_zero = 0;
+
+	    if (_BitScanReverse(&leading_zero, value))
+	    {
+	       return 31 - leading_zero;
+	    }
+
+	    return 32;
+	}
+#else
+	inline int clz(uint32_t value)
+	{
+		return __builtin_clz(value);
+	}
+#endif
+    	
+    }
+	
   /**
    * \brief Basic operations necessary for implementing utf8
    */
@@ -51,14 +74,14 @@ namespace u5e {
       // count leading zeros on bitwise negated first octet.  for
       // single-octet codepoints, this would return 0, so we do
       // std::max for 1 for those cases.
-      return std::max(__builtin_clz(~(first_octet << 24)),1);
+      return std::max(detail::clz(~(first_octet << 24)),1);
     }
 
     /**
      * How many octets will this codepoint take
      */
     inline static int encoded_size(int value) {
-      return std::ceil((float)(32 - __builtin_clz(value) - 1) / (float)6);
+      return std::ceil((float)(32 - detail::clz(value) - 1) / (float)6);
     }
     
   };
